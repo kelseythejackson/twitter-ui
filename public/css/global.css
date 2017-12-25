@@ -2500,3 +2500,18 @@ input[type="reset"],
 input[type="button"] {
   padding: 16px 20px;
 }
+
+nav ul.circle--inline.extra li {
+  background: #ffffff;
+  border-radius: 8px;
+  color: #000000;
+  padding: 8px;
+  box-shadow: 0px 0px 8px rgba(0,0,0, .5);
+}
+
+nav ul.circle--inline.extra li a {
+  cursor: pointer;
+  color: #000000;
+ 
+}
+

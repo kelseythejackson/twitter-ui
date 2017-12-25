@@ -20,8 +20,10 @@ html(lang='en')
       CSS
       ––––––––––––––––––––––––––––––––––––––––––––––––––
     link(rel='stylesheet', href='css/global.css')
+    link(rel='shortcut icon', href='')
+
   body
-    header.circle--header
+    header.circle--header(style=`background: url(${creds.profile_banner_url}) center / cover`)
       .bounds
         .circle--fluid
           .circle--fluid--cell
@@ -35,19 +37,19 @@ html(lang='en')
               h1 @#{creds.screen_name}
           .circle--fluid--cell.align-right
             nav
-              ul.circle--inline
+              ul.circle--inline.extra
                 li
                   a Sign Out
     .app--tweet
-      form
+      form(action="/", method="post")
         .circle--fluid
           .circle--fluid--cell.circle--fluid--primary.align-bottom.app--tweet--post
             .app--avatar(style='background-image: url(images/m-spore.png)')
               img(src='images/m-spore.png')
-            textarea#tweet-textarea.circle--textarea--input(placeholder="What's happening?")
+            textarea#tweet-textarea.circle--textarea--input(placeholder="What's happening?",  name="post")
             strong#tweet-char.app--tweet--char 140
           .circle--fluid--cell.align-bottom
-            button.button-primary Tweet
+            button.button-primary(type='submit') Tweet
     .bounds.app--body
       .app--section--header
         .grid-33
