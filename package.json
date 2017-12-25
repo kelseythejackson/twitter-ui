@@ -1,0 +1,32 @@
+{
+  "name": "twitter-ui",
+  "version": "1.0.0",
+  "description": "A twitter client built with Express and NodeJS",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kelseythejackson/twitter-ui.git"
+  },
+  "keywords": [
+    "twitter",
+    "API",
+    "Node",
+    "Express"
+  ],
+  "author": "Kelsey Jackson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kelseythejackson/twitter-ui/issues"
+  },
+  "homepage": "https://github.com/kelseythejackson/twitter-ui#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "moment": "^2.20.1",
+    "pug": "^2.0.0-rc.4",
+    "twit": "^2.2.9"
+  }
+}
