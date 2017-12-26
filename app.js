@@ -8,15 +8,7 @@ app.locals.moment = require('moment');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Handle 404
-app.use(function(req, res) {
-    res.send('404: Page not Found', 404);
- });
- 
- // Handle 500
- app.use(function(error, req, res, next) {
-    res.send('500: Internal Server Error', 500);
- });
+
     
 
 
@@ -50,20 +42,27 @@ app.use((req, res, next) => {
     });
 });
 
-app.post('/', (req, res, next)=> {
-    // console.log(req.body);
-    res.render('hello')
-    // res.json(req.body);
-  });
+app.use((req, res, next) => {
+    const { post } = req.body;
+    req.post = post;
+    console.log(req.post);
+    next();
+});
 
 app.use('/',(req, res) => {
     const { list }  = req;
     const { creds } = req;
     const { tweets } = req;
     const { messages } = req;
+
     res.render('index', { list, creds, tweets, messages });
-    
+    next();
 }); 
+
+app.post('/', (req, res, next)=> {
+    const {post} = req;
+    res.render('index', post);
+});
 
 
 
