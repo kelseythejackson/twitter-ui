@@ -11,7 +11,7 @@ A User Interface to consume Twitter's API
 * `npm install`
 
 ## Config file
-You'll need to create a config.js file in the root folder and populate it with the keys and access tokens when you create a twitter app. This is a good link that show you how to do that:
+You'll need to create a config.js file in the root folder and populate it with the keys and access tokens when you create a twitter app. This is a good link that show's you how to do that:
 [How to Create a Twitter App in 8 Easy Steps](https://iag.me/socialmedia/how-to-create-a-twitter-app-in-8-easy-steps/)
 
 ```javascript
