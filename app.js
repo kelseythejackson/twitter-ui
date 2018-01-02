@@ -9,8 +9,6 @@ app.locals.moment = moment;
 app.use(express.static('public'));
 app.set('view engine', 'pug');
 
-
-
 app.use(
     (req, res, next) => {
         t.get('account/verify_credentials', { name: 'Kelsey Jackson'}, (err, creds, res) => {
