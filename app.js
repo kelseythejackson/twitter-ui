@@ -9,6 +9,8 @@ app.locals.moment = moment;
 app.use(express.static('public'));
 app.set('view engine', 'pug');
 
+
+
 app.use(
     (req, res, next) => {
         t.get('account/verify_credentials', { name: 'Kelsey Jackson'}, (err, creds, res) => {
@@ -53,6 +55,23 @@ io.on('connection', (socket) => {
             io.emit('chat message', {data, date});
         });      
     });    
+});
+
+app.use((req, res, next) => {
+    const err = new Error('We have a problem on end and we\'re looking into it, sorry for the inconvenience.');
+    err.status = 500;
+    next();
+});
+
+app.use((req, res, next) => {
+    const err = new Error('Hmmm, the page you\'re looking for isn\'t here, sorry about that.');
+    err.status = 404;
+    next(err);
+});
+app.use((err, req, res, next) => {
+    res.locals.error = err;
+    res.status(err.status);
+    res.render('error');
 });
 server.listen(3000, () => {
     console.log('App listening on port 3000!');

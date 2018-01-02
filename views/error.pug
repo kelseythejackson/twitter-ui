@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    body.error-body
+        div.error-div
+            img.error-img(src="images/m-spore-error.png", alt="")
+            h1.error-text #{error.status}
+            h2.error-text #{error.message}
+            a.error-link-back(href="/") take me back to the homepage
+        
+        
