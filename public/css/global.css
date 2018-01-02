@@ -980,7 +980,7 @@ button.button-text:focus {
 }
 
 /* line 4, ../sass/circle/core/_forms.sass */
-textarea {
+textarea, input {
   padding: 15px;
   border: 1px solid #aeddfa;
   box-shadow: none;
@@ -2499,4 +2499,16 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"] {
   padding: 16px 20px;
+}
+
+.circle--inline .sign-out {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  
+}
+
+.circle--inline .sign-out a {
+  color: #000000;
+  margin: 8px;
 }

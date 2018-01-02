@@ -21,7 +21,7 @@ html(lang='en')
       ––––––––––––––––––––––––––––––––––––––––––––––––––
     link(rel='stylesheet', href='css/global.css')
   body
-    header.circle--header
+    header.circle--header(style=`background: url(${creds.profile_banner_url}) center / cover`)
       .bounds
         .circle--fluid
           .circle--fluid--cell
@@ -36,18 +36,18 @@ html(lang='en')
           .circle--fluid--cell.align-right
             nav
               ul.circle--inline
-                li
+                li.sign-out
                   a Sign Out
     .app--tweet
-      form
+      form(action="/", method="post")
         .circle--fluid
           .circle--fluid--cell.circle--fluid--primary.align-bottom.app--tweet--post
             .app--avatar(style='background-image: url(images/m-spore.png)')
               img(src='images/m-spore.png')
-            textarea#tweet-textarea.circle--textarea--input(placeholder="What's happening?")
+            input#tweet-textarea.circle--textarea--input(placeholder="What's happening?", name="tweet")
             strong#tweet-char.app--tweet--char 140
           .circle--fluid--cell.align-bottom
-            button.button-primary Tweet
+            button.button-primary(type="button") Tweet
     .bounds.app--body
       .app--section--header
         .grid-33
@@ -62,10 +62,14 @@ html(lang='en')
             h2 Direct Messages
       .grid-33
         .app--section
-          include includes/tweetlist.pug
+          include includes/tweets
       .grid-33
         .app--section
-          include includes/friendslist.pug
+          include includes/friends
       .grid-33
         .app--section
-          include includes/message-list.pug
+          include includes/messages
+    script(src='/socket.io/socket.io.js')
+    script(src='js/script.js')
+    
+        

@@ -10,4 +10,4 @@ ul.app--message--list
                         img(src='images/m-spore.png')
                     p.app--message--text
                         | #{message.text}
-                    p.app--message--timestamp= (moment(message.created_at).startOf('second').fromNow())
+                    p.app--message--timestamp #{moment(message.created_at, 'ddd MMM DD HH:mm:ss ZZ YYYY').fromNow()}
