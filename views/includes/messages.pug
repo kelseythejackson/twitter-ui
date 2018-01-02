@@ -1,0 +1,13 @@
+ul.app--message--list
+    each message in messages
+        li
+            h3
+                | Conversation with 
+                a #{message.recipient.name}
+            ul.app--message--conversation
+                li.app--message--me
+                    .app--avatar(style=`background-image: url(${message.sender.profile_image_url})`)
+                        img(src='images/m-spore.png')
+                    p.app--message--text
+                        | #{message.text}
+                    p.app--message--timestamp #{moment(message.created_at, 'ddd MMM DD HH:mm:ss ZZ YYYY').fromNow()}
