@@ -6,19 +6,19 @@ const io = require('socket.io')(server);
 const t = require('./config');
 const moment = require('moment');
 
-app.locals.moment = moment; // Sets a momnet key on the locals object
+app.locals.moment = moment; // Sets a moment key on the locals object
 app.use(express.static('public')); // Tells express where the static files are.
 app.set('view engine', 'pug'); // Sets the templating engine for the app.
 
-/*--- 
-This middle where grabs the credentials, tweets, following list, and sent direct messages using the Twit module in config.js
+/*---
+This middleware grabs the credentials, tweets, following list, and sent direct messages using the Twit module in config.js
 And saves them as keys on the request object
 ---*/
-app.use( 
+app.use(
     (req, res, next) => {
         t.get('account/verify_credentials', { screen_name: t.screen_name }, (err, creds, res) => {
             req.creds = creds;
-            next(); 
+            next();
         });
     },
     (req, res, next) => {
@@ -30,19 +30,19 @@ app.use(
     (req, res, next) => {
         t.get('friends/list', { screen_name: t.screen_name, count: 15 }, (err, list, res) => {
             req.friendsList = list.users;
-            next(); 
-        });  
+            next();
+        });
     },
     (req, res, next) => {
         t.get('direct_messages/sent', { count: 5 }, (err, messages, res) => {
             req.messages = messages;
-            next(); 
-        });  
+            next();
+        });
     }
 );
 
 
-//In the get request, the data is saved as constants then supplied to the route.
+//In the get request, the data is saved as constants, then supplied to the route.
 
 app.get('/', (req, res) => {
     const { creds, tweets, friendsList, messages } = req;
@@ -56,12 +56,12 @@ io.on('connection', (socket) => {
         console.log('user disconnected');
     });
 
-    socket.on('chat message', function(data){   
+    socket.on('chat message', function(data){
         t.post('statuses/update', { status: data }, function(err, data, response) {
             const date = moment(data.created_at, 'ddd MMM DD HH:mm:ss ZZ YYYY').fromNow();
             io.emit('chat message', {data, date});
-        });      
-    });    
+        });
+    });
 });
 
 // Error pages
