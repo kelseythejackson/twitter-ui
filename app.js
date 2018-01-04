@@ -11,19 +11,19 @@ app.set('view engine', 'pug');
 
 app.use(
     (req, res, next) => {
-        t.get('account/verify_credentials', { name: 'Kelsey Jackson'}, (err, creds, res) => {
+        t.get('account/verify_credentials', { screen_name: t.screen_name }, (err, creds, res) => {
             req.creds = creds;
             next(); 
         });
     },
     (req, res, next) => {
-        t.get('statuses/user_timeline', { screen_name: 'paisley_darts', count: 5, include_rts: true }, (err, data, res) => {
+        t.get('statuses/user_timeline', { screen_name: t.screen_name, count: 5, include_rts: true }, (err, data, res) => {
             req.tweets = data;
             next();
         });
     },
     (req, res, next) => {
-        t.get('friends/list', { screen_name: 'paisley_darts', count: 15 }, (err, list, res) => {
+        t.get('friends/list', { screen_name: t.screen_name, count: 15 }, (err, list, res) => {
             req.friendsList = list.users;
             next(); 
         });  
