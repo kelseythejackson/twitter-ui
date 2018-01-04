@@ -1,3 +1,4 @@
+// These set up an Express app and require the appropriate modules
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
@@ -5,11 +6,15 @@ const io = require('socket.io')(server);
 const t = require('./config');
 const moment = require('moment');
 
-app.locals.moment = moment;
-app.use(express.static('public'));
-app.set('view engine', 'pug');
+app.locals.moment = moment; // Sets a momnet key on the locals object
+app.use(express.static('public')); // Tells express where the static files are.
+app.set('view engine', 'pug'); // Sets the templating engine for the app.
 
-app.use(
+/*--- 
+This middle where grabs the credentials, tweets, following list, and sent direct messages using the Twit module in config.js
+And saves them as keys on the request object
+---*/
+app.use( 
     (req, res, next) => {
         t.get('account/verify_credentials', { screen_name: t.screen_name }, (err, creds, res) => {
             req.creds = creds;
@@ -36,11 +41,15 @@ app.use(
     }
 );
 
+
+//In the get request, the data is saved as constants then supplied to the route.
+
 app.get('/', (req, res) => {
     const { creds, tweets, friendsList, messages } = req;
     res.render('index', { creds, tweets, friendsList, messages });
 });
 
+// sets up the server side of the live update feature
 io.on('connection', (socket) => {
     console.log('a user connected');
     socket.on('disconnect', () => {
@@ -55,6 +64,7 @@ io.on('connection', (socket) => {
     });    
 });
 
+// Error pages
 app.use((req, res, next) => {
     const err = new Error('We have a problem on end and we\'re looking into it, sorry for the inconvenience.');
     err.status = 500;
@@ -71,6 +81,8 @@ app.use((err, req, res, next) => {
     res.status(err.status);
     res.render('error');
 });
+
+
 server.listen(3000, () => {
     console.log('App listening on port 3000!');
 });
